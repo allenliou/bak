@@ -30,17 +30,7 @@ static void update_text() {
 static void increment_click_handler(ClickRecognizerRef recognizer, void *context) {
   num_drinks++;
   update_text();
- //Create an array of ON-OFF-ON etc durations in milliseconds
-uint32_t segments[] = {100, 200, 500};
- 
-//Create a VibePattern structure with the segments and length of the pattern as fields
-VibePattern pattern = {
-    .durations = segments,
-    .num_segments = ARRAY_LENGTH(segments),
-};
- 
-//Trigger the custom pattern to be executed
-vibes_enqueue_custom_pattern(pattern);
+  vibes_double_pulse();
 }
 
 static void decrement_click_handler(ClickRecognizerRef recognizer, void *context) {
