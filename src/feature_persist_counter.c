@@ -1,5 +1,6 @@
 // Allen, Karthik, Brendon 
 #include "pebble.h"
+// #include "autoconfig.h"
 
 // This is a custom defined key for saving our count field
 #define NUM_DRINKS_PKEY 1
@@ -60,10 +61,10 @@ static void window_load(Window *me) {
   Layer *layer = window_get_root_layer(me);
   const int16_t width = layer_get_frame(layer).size.w - ACTION_BAR_WIDTH - 3;
 
-  header_text_layer = text_layer_create(GRect(4, 0, width, 60));
-  text_layer_set_font(header_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
+  header_text_layer = text_layer_create(GRect(0, 4, width, 60));
+  text_layer_set_font(header_text_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_background_color(header_text_layer, GColorClear);
-  text_layer_set_text(header_text_layer, "Display Time");
+  text_layer_set_text_alignment(header_text_layer, GTextAlignmentLeft);
   layer_add_child(layer, text_layer_get_layer(header_text_layer));
 
   body_text_layer = text_layer_create(GRect(4, 44, width, 60));
@@ -91,12 +92,23 @@ static void window_unload(Window *window) {
   action_bar_layer_destroy(action_bar);
 }
 
-
+void tick_handler(struct tm *tick_time, TimeUnits units_changed)
+{
+  //Allocate long-lived storage (required by TextLayer)
+  static char buffer[] = "00:00";
+  
+  //Write the time to the buffer in a safe manner
+  strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
+  
+  //Set the TextLayer to display the buffer
+  text_layer_set_text(header_text_layer, buffer);
+}
 
 static void init(void) {
   action_icon_plus = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_ICON_PLUS);
   action_icon_minus = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_ICON_MINUS);
 
+ // autoconfig_init();
   window = window_create();
   window_set_fullscreen(window,true);
   window_set_window_handlers(window, (WindowHandlers) {
@@ -106,7 +118,7 @@ static void init(void) {
 
   // Get the count from persistent storage for use if it exists, otherwise use the default
   num_drinks = persist_exists(NUM_DRINKS_PKEY) ? persist_read_int(NUM_DRINKS_PKEY) : NUM_DRINKS_DEFAULT;
-
+ tick_timer_service_subscribe(MINUTE_UNIT, (TickHandler)tick_handler);
   window_stack_push(window, true /* Animated */);
 }
 
@@ -116,6 +128,8 @@ static void deinit(void) {
 
   window_destroy(window);
 
+ //  autoconfig_deinit();
+  
   gbitmap_destroy(action_icon_plus);
   gbitmap_destroy(action_icon_minus);
 }
