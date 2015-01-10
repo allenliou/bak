@@ -44,9 +44,9 @@ static void decrement_click_handler(ClickRecognizerRef recognizer, void *context
 }
 
 static void click_config_provider(void *context) {
-  const uint16_t repeat_interval_ms = 50;
-  window_single_repeating_click_subscribe(BUTTON_ID_UP, repeat_interval_ms, (ClickHandler) increment_click_handler);
-  window_single_repeating_click_subscribe(BUTTON_ID_DOWN, repeat_interval_ms, (ClickHandler) decrement_click_handler);
+  //const uint16_t repeat_interval_ms = 50;
+  window_single_click_subscribe(BUTTON_ID_UP, (ClickHandler) increment_click_handler);
+  window_single_click_subscribe(BUTTON_ID_DOWN, (ClickHandler) decrement_click_handler);
 }
 
 static void window_load(Window *me) {
@@ -90,6 +90,8 @@ static void window_unload(Window *window) {
 
   action_bar_layer_destroy(action_bar);
 }
+
+
 
 static void init(void) {
   action_icon_plus = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_ICON_PLUS);
