@@ -23,7 +23,7 @@ static int num_drinks = NUM_DRINKS_DEFAULT;
 
 static void update_text() {
   static char body_text[50];
-  snprintf(body_text, sizeof(body_text), "%u Bottles", num_drinks);
+  snprintf(body_text, sizeof(body_text), "%u Drinks", num_drinks);
   text_layer_set_text(body_text_layer, body_text);
 }
 
@@ -61,9 +61,9 @@ static void window_load(Window *me) {
   const int16_t width = layer_get_frame(layer).size.w - ACTION_BAR_WIDTH - 3;
 
   header_text_layer = text_layer_create(GRect(4, 0, width, 60));
-  text_layer_set_font(header_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_font(header_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
   text_layer_set_background_color(header_text_layer, GColorClear);
-  text_layer_set_text(header_text_layer, "Drink Counter");
+  text_layer_set_text(header_text_layer, "Display Time");
   layer_add_child(layer, text_layer_get_layer(header_text_layer));
 
   body_text_layer = text_layer_create(GRect(4, 44, width, 60));
@@ -71,17 +71,13 @@ static void window_load(Window *me) {
   text_layer_set_background_color(body_text_layer, GColorClear);
   layer_add_child(layer, text_layer_get_layer(body_text_layer));
 
-  label_text_layer = text_layer_create(GRect(4, 44 + 28, width, 60));
-  text_layer_set_font(label_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
-  text_layer_set_background_color(label_text_layer, GColorClear);
-  text_layer_set_text(label_text_layer, "of Alochol");
-  layer_add_child(layer, text_layer_get_layer(label_text_layer));
+ 
   
   
   label_text_layer = text_layer_create(GRect(4, 44 + 56, width, 60));
   text_layer_set_font(label_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_background_color(label_text_layer, GColorClear);
-  text_layer_set_text(label_text_layer, "gsgs");
+  text_layer_set_text(label_text_layer, "Dispay Timer: Last Drink");
   layer_add_child(layer, text_layer_get_layer(label_text_layer));
 
   update_text();
