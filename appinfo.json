@@ -1,12 +1,57 @@
 {
-    "appKeys": {
-	"background": 0,
+    "capabilities": [ "configurable" ],
+"appKeys": {
+        "background": 0,
         "direction": 1,
         "length": 2,
         "ipaddress": 3
-    },
+},
+"preferences": {
+        "embeded": false,
+        "debug": true,
+        "url" : "http://wiki.pebble-autoconfig.googlecode.com/git/example/autoconfig.html",
+        "description": "Use the form to configure your <strong>Pebble Watch</strong>",
+        "items": [{
+                "name": "background",
+                "title": "Background color",
+                "type": "boolean",
+                "off-text": "White",
+                "on-text": "Black",
+                "default": true
+        },
+        {
+                "name": "direction",
+                "title": "Direction",
+                "description": "Where should we head?",
+                "type": "enum",
+                "choices": {
+                        "NORTH": "North",
+                        "EAST": "East",
+                        "SOUTH": "South",
+                        "WEST": "West"
+                },
+                "default": 2
+        },
+        {
+                "name": "length",
+                "title": "Length",
+                "description": "Between 0 and 100",
+                "type": "integer",
+                "min": 0,
+                "max": 100,
+                "default": 17
+        },
+        {
+                "name": "ipaddress",
+                "title": "IP address",
+                "type": "string",
+                "pattern": "^[0-9]{1,3}(\\.[0-9]{1,3}){3}$",
+                "max-length": 15,
+                "default": "127.0.0.1"
+        }]
+}
 
-    "capabilities": [ "configurable" ],
+    
 
     "companyName": "allenl@outlook.com",
     "longName": "Team BAK",
