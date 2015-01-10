@@ -1,0 +1,30 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "allenl@outlook.com",
+    "longName": "Team BAK",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/action_icon_minus.png",
+                "name": "IMAGE_ACTION_ICON_MINUS",
+                "type": "png"
+            },
+            {
+                "file": "images/action_icon_plus.png",
+                "name": "IMAGE_ACTION_ICON_PLUS",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "Team BAK",
+    "uuid": "321cdeca-35a2-452f-8981-550c2ee7b789",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
