@@ -1,4 +1,4 @@
-// Allen, Karthik, Brandon 
+// Allen, Karthik, Brendon 
 #include "pebble.h"
 
 // This is a custom defined key for saving our count field
@@ -30,6 +30,17 @@ static void update_text() {
 static void increment_click_handler(ClickRecognizerRef recognizer, void *context) {
   num_drinks++;
   update_text();
+ //Create an array of ON-OFF-ON etc durations in milliseconds
+uint32_t segments[] = {100, 200, 500};
+ 
+//Create a VibePattern structure with the segments and length of the pattern as fields
+VibePattern pattern = {
+    .durations = segments,
+    .num_segments = ARRAY_LENGTH(segments),
+};
+ 
+//Trigger the custom pattern to be executed
+vibes_enqueue_custom_pattern(pattern);
 }
 
 static void decrement_click_handler(ClickRecognizerRef recognizer, void *context) {
@@ -73,7 +84,14 @@ static void window_load(Window *me) {
   label_text_layer = text_layer_create(GRect(4, 44 + 28, width, 60));
   text_layer_set_font(label_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_background_color(label_text_layer, GColorClear);
-  text_layer_set_text(label_text_layer, "of drinks on the wall");
+  text_layer_set_text(label_text_layer, "of Alochol");
+  layer_add_child(layer, text_layer_get_layer(label_text_layer));
+  
+  
+  label_text_layer = text_layer_create(GRect(4, 44 + 56, width, 60));
+  text_layer_set_font(label_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_background_color(label_text_layer, GColorClear);
+  text_layer_set_text(label_text_layer, "gsgs");
   layer_add_child(layer, text_layer_get_layer(label_text_layer));
 
   update_text();
