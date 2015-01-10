@@ -8,7 +8,6 @@
 
 static Window *window;
 
-
 static GBitmap *action_icon_plus;
 static GBitmap *action_icon_minus;
 
