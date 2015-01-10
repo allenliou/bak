@@ -98,6 +98,7 @@ static void init(void) {
   action_icon_minus = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_ICON_MINUS);
 
   window = window_create();
+  window_set_fullscreen(window,true);
   window_set_window_handlers(window, (WindowHandlers) {
     .load = window_load,
     .unload = window_unload,
